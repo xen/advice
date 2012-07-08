@@ -6,7 +6,7 @@
 etc/dev
 bin
 .installed.cfg
-
+etc/
 advice.db
 
 # IDE
