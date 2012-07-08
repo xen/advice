@@ -1,0 +1,14 @@
+*.py[co]
+.DS_Store
+# Packages
+*.egg
+*.egg-info
+etc/dev
+bin
+.installed.cfg
+
+advice.db
+
+# IDE
+.idea
+.codeintel
