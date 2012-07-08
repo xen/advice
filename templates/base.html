@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Comfort.ly{% endblock %} — Таки советы</title>
+  <title>{% block title %}{% endblock %} — Таки советы из Одессы</title>
   <meta name="description" content="Советы с Привоза">
   <meta name="author" content="http://devcult.ru/">
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -49,13 +49,14 @@
           <span class="icon-bar"></span>
         </a>
         <a class="brand" href="#">Советы из Одессы</a>
-        <div class="nav-collapse">
+        <!-- <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div> --> 
+        <!--/.nav-collapse -->
       </div>
     </div>
   </div>
@@ -76,15 +77,21 @@
 
     {% block content %}{% endblock %}
 
+  {# {% include "footer.html" %} #}
+  <footer class="footer">
+    <p class="pull-right">{% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+    {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+    {% endif %}
+    </p>
+    {#<p>Следите на <a href="http://twitter.com/odessitme" target="_blank">@odessitme</a>.</p>#}
+</footer>
+
   </div> <!-- /container -->
 {% endblock %}
 
-{# {% include "footer.html" %} #}
 
-  {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
-  {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
-  {% endif %}
+
 
 </body>
