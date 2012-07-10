@@ -32,7 +32,6 @@ def show_entries():
     cur = g.db.execute('select text, id from entries order by random() limit 1;')
     #entries = [dict(text=row[0]) for row in cur.fetchall()]
     text = cur.fetchone()
-    print(text)
     if text:
         return render_template('advices.html', text=text[0])
     else:
