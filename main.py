@@ -31,8 +31,12 @@ def show_entries():
     # SELECT * FROM table ORDER BY RANDOM() LIMIT 1;
     cur = g.db.execute('select text, id from entries order by random() limit 1;')
     #entries = [dict(text=row[0]) for row in cur.fetchall()]
-    text = cur.fetchone()[0]
-    return render_template('advices.html', text=text)
+    text = cur.fetchone()
+    print(text)
+    if text:
+        return render_template('advices.html', text=text[0])
+    else:
+        return render_template('advices.html', text="No entries")
 
 
 @app.route('/add', methods=['POST'])
@@ -90,6 +94,7 @@ def main(host='0.0.0.0', port=5000, config='config', command='run'):
     # the toolbar is only enabled in debug mode:
     app.config.from_object(config)
     if command == 'init':
+        print("Database init %s" % app.config['DATABASE'])
         init_db()
     else:
         app.run(host=host, port=port)
