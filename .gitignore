@@ -3,6 +3,7 @@
 # Packages
 *.egg
 *.egg-info
+local.py
 etc/dev
 bin
 .installed.cfg
