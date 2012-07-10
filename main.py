@@ -48,6 +48,9 @@ def add_entry():
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
+@app.route('/contact', methods=['GET'])
+def contact():
+    return render_template('contact.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
