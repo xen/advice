@@ -8,6 +8,10 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 # create our little application :)
 app = Flask(__name__)
+app.config.from_object('config')
+app.config.from_pyfile('local.cfg', silent=True)
+celery.config_from_object(app.config)
+
 
 def connect_db():
     """Returns a new connection to the database."""
@@ -86,15 +90,13 @@ def init_db():
         db.commit()
 
 @command
-def main(host='0.0.0.0', port=5000, config='config', command='run'):
+def main(host='0.0.0.0', port=5000, command='run'):
     """
     :param host: listen to ip address
     :param port: listen to port, default 5000
     :param config: configuration file
     :param command: default 'run', for db init use 'init'
     """
-    # the toolbar is only enabled in debug mode:
-    app.config.from_object(config)
     if command == 'init':
         print("Database init %s" % app.config['DATABASE'])
         init_db()
