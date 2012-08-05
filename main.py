@@ -10,8 +10,6 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 app = Flask(__name__)
 app.config.from_object('config')
 app.config.from_pyfile('local.cfg', silent=True)
-celery.config_from_object(app.config)
-
 
 def connect_db():
     """Returns a new connection to the database."""
