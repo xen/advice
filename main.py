@@ -4,7 +4,7 @@ from consoleargs import command
 from sqlite3 import dbapi2 as sqlite3
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+     render_template, flash, make_response
 
 # create our little application :)
 app = Flask(__name__)
@@ -38,6 +38,12 @@ def show_entries():
         return render_template('advices.html', text=text[0])
     else:
         return render_template('advices.html', text="No entries")
+
+@app.route('/robots.txt')
+def robots():
+    response = make_response(open('static/robots.txt').read())
+    response.headers["Content-type"] = "text/plain"
+    return response
 
 
 @app.route('/add', methods=['POST'])
